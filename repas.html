@@ -4,37 +4,100 @@
   <meta charset="UTF-8">
   <title>Calcul des glucides - Repas</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
-    h1 { font-size: 24px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-    select, input { padding: 5px; width: 100%; }
-    tfoot td { font-weight: bold; }
-    .add-row { margin-top: 10px; }
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 0;
+    }
+
+    main {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    select, input {
+      padding: 5px;
+      width: 100%;
+    }
+
+    tfoot td {
+      font-weight: bold;
+    }
+
+    .add-row {
+      margin-top: 10px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #00a8cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-row:hover {
+      background-color: #007ea7;
+    }
   </style>
 </head>
 <body>
-  <h1>Calcul des glucides - Repas</h1>
-  <table id="repas-table">
-    <thead>
-      <tr>
-        <th>Catégorie</th>
-        <th>Aliment</th>
-        <th>Quantité (g ou unité)</th>
-        <th>Glucides / 100g ou unité</th>
-        <th>Glucides consommés</th>
-      </tr>
-    </thead>
-    <tbody id="repas-body">
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="4">Total glucides</td>
-        <td id="total-glucides">0</td>
-      </tr>
-    </tfoot>
-  </table>
-  <button class="add-row" onclick="ajouterLigne()">➕ Ajouter un aliment</button>
+
+  <header>
+    <h1>🩺 Suivi des glucides pour diabète de type 1</h1>
+    <p>Calcule facilement les glucides de ton repas</p>
+  </header>
+
+  <main>
+    <table id="repas-table">
+      <thead>
+        <tr>
+          <th>Catégorie</th>
+          <th>Aliment</th>
+          <th>Quantité (g ou unité)</th>
+          <th>Glucides / 100g ou unité</th>
+          <th>Glucides consommés</th>
+        </tr>
+      </thead>
+      <tbody id="repas-body"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">Total glucides</td>
+          <td id="total-glucides">0</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <button class="add-row" onclick="ajouterLigne()">➕ Ajouter un aliment</button>
+  </main>
 
   <script>
     const aliments = [
@@ -42,7 +105,7 @@
       { categorie: "Produits Laitiers", aliment: "Yaourt nature", glucides: 4.8 },
       { categorie: "Féculents", aliment: "Riz cuit", glucides: 28 },
       { categorie: "Féculents", aliment: "Pâtes cuites", glucides: 25 },
-      { categorie: "Fruits", aliment: "Pomme", glucides: 12 },
+      { categorie: "Fruits", aliment: "Pomme", glucides: 12 }
     ];
 
     function ajouterLigne() {
@@ -93,8 +156,8 @@
       document.getElementById("total-glucides").textContent = total.toFixed(1);
     }
 
-    // Ajouter une première ligne au démarrage
     ajouterLigne();
   </script>
+
 </body>
 </html>
