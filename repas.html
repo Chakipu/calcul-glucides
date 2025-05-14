@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Calcul des glucides - Repas</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    select, input { padding: 5px; width: 100%; }
+    tfoot td { font-weight: bold; }
+    .add-row { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Calcul des glucides - Repas</h1>
+  <table id="repas-table">
+    <thead>
+      <tr>
+        <th>Catégorie</th>
+        <th>Aliment</th>
+        <th>Quantité (g ou unité)</th>
+        <th>Glucides / 100g ou unité</th>
+        <th>Glucides consommés</th>
+      </tr>
+    </thead>
+    <tbody id="repas-body">
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">Total glucides</td>
+        <td id="total-glucides">0</td>
+      </tr>
+    </tfoot>
+  </table>
+  <button class="add-row" onclick="ajouterLigne()">➕ Ajouter un aliment</button>
+
+  <script>
+    const aliments = [
+      { categorie: "Produits Laitiers", aliment: "Lait demi-écrémé", glucides: 5.2 },
+      { categorie: "Produits Laitiers", aliment: "Yaourt nature", glucides: 4.8 },
+      { categorie: "Féculents", aliment: "Riz cuit", glucides: 28 },
+      { categorie: "Féculents", aliment: "Pâtes cuites", glucides: 25 },
+      { categorie: "Fruits", aliment: "Pomme", glucides: 12 },
+    ];
+
+    function ajouterLigne() {
+      const tbody = document.getElementById("repas-body");
+      const tr = document.createElement("tr");
+
+      const tdCategorie = document.createElement("td");
+      tdCategorie.innerHTML = `<input type="text" class="categorie" readonly>`;
+
+      const tdAliment = document.createElement("td");
+      const select = document.createElement("select");
+      select.innerHTML = `<option value="">-- Choisir --</option>` +
+        aliments.map(a => `<option value="${a.aliment}" data-cat="${a.categorie}" data-glucides="${a.glucides}">${a.aliment}</option>`).join("");
+      select.onchange = function () {
+        const option = this.selectedOptions[0];
+        const row = this.closest("tr");
+        row.querySelector(".categorie").value = option.dataset.cat;
+        row.querySelector(".glucides-unit").value = option.dataset.glucides;
+        calculerGlucides(row);
+      };
+      tdAliment.appendChild(select);
+
+      const tdQuantite = document.createElement("td");
+      tdQuantite.innerHTML = `<input type="number" class="quantite" min="0" onchange="calculerGlucides(this.closest('tr'))">`;
+
+      const tdGlucidesUnit = document.createElement("td");
+      tdGlucidesUnit.innerHTML = `<input type="number" class="glucides-unit" readonly>`;
+
+      const tdResultat = document.createElement("td");
+      tdResultat.innerHTML = `<input type="number" class="glucides-total" readonly>`;
+
+      tr.append(tdCategorie, tdAliment, tdQuantite, tdGlucidesUnit, tdResultat);
+      tbody.appendChild(tr);
+    }
+
+    function calculerGlucides(row) {
+      const quantite = parseFloat(row.querySelector(".quantite").value) || 0;
+      const glucides = parseFloat(row.querySelector(".glucides-unit").value) || 0;
+      const total = (quantite * glucides) / 100;
+      row.querySelector(".glucides-total").value = total.toFixed(1);
+      calculerTotalGlucides();
+    }
+
+    function calculerTotalGlucides() {
+      const totaux = document.querySelectorAll(".glucides-total");
+      let total = 0;
+      totaux.forEach(input => total += parseFloat(input.value) || 0);
+      document.getElementById("total-glucides").textContent = total.toFixed(1);
+    }
+
+    // Ajouter une première ligne au démarrage
+    ajouterLigne();
+  </script>
+</body>
+</html>
