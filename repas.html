@@ -138,7 +138,12 @@
     <p>Calcule facilement les glucides de ton repas</p>
     <button class="toggle-darkmode" onclick="document.body.classList.toggle('dark')">🌙</button>
   </header>
-
+  
+    <div class="total-glucides-haut">
+      <h2>Total glucides consommés</h2>
+      <p><strong id="total-glucides">0</strong> g</p>
+    </div>
+    
   <main>
     <h2>Tableau 1 : Glucides par 100g</h2>
     <table id="repas-table">
@@ -186,8 +191,7 @@
     </table>
     <button class="add-row" onclick="ajouterLaitier()">➕ Ajouter un produit laitier</button>
 
-    <h2>Total glucides consommés</h2>
-    <p><strong id="total-glucides">0</strong> g</p>
+
   </main>
 
   <script>
