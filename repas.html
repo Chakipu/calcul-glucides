@@ -55,10 +55,17 @@
       border-radius: 10px;
     }
 
+    /* Nouveau : conteneur pour scroll horizontal */
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      min-width: 600px; /* pour forcer scroll sur mobile */
     }
 
     th, td {
@@ -133,7 +140,6 @@
     }
   </style>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
 <script>
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -159,6 +165,7 @@
       <p><strong id="total-glucides">0</strong> g</p>
     </div>
     <h2>Tableau 1 : Glucides par 100g</h2>
+    <div class="table-wrapper">
     <table id="repas-table">
       <thead>
         <tr>
@@ -175,6 +182,7 @@
     <button class="add-row" onclick="ajouterLigne()">➕ Ajouter un aliment</button>
 
     <h2>Fruits par portion/unité</h2>
+    <div class="table-wrapper">
     <table id="portion-table">
       <thead>
         <tr>
@@ -190,6 +198,7 @@
     <button class="add-row" onclick="ajouterPortion()">➕ Ajouter une portion</button>
 
     <h2>Produits Laitiers</h2>
+    <div class="table-wrapper">
     <table id="laitier-table">
       <thead>
         <tr>
