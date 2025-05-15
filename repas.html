@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Calcul des glucides - Repas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: sans-serif;
@@ -11,6 +12,40 @@
       background: url('./images/soukie_ghibli.png') no-repeat center center fixed;
       background-size: cover;
       color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      background: #121212;
+      color: #f1f1f1;
+    }
+
+    .dark-mode .banniere,
+    .dark-mode header,
+    .dark-mode main {
+      background-color: rgba(30, 30, 30, 0.95);
+      color: #f1f1f1;
+    }
+
+    .dark-mode select,
+    .dark-mode input {
+      background-color: #333;
+      color: #f1f1f1;
+      border: 1px solid #888;
+    }
+
+    .dark-mode table th,
+    .dark-mode table td {
+      border: 1px solid #555;
+    }
+
+    .dark-mode .add-row {
+      background-color: #444;
+      color: #fff;
+    }
+
+    .dark-mode .add-row:hover {
+      background-color: #666;
     }
 
     header {
@@ -76,9 +111,29 @@
       font-size: 1.5em;
       font-weight: bold;
     }
+
+    #toggle-dark {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #eee;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .dark-mode #toggle-dark {
+      background-color: #333;
+      color: #f1f1f1;
+    }
   </style>
 </head>
 <body>
+<button id="toggle-dark">🌙 Mode sombre</button>
+
 <div class="banniere">
   Calcul des glucides – Repas
 </div>
@@ -220,6 +275,14 @@
       totaux.forEach(input => total += parseFloat(input.value) || 0);
       document.getElementById("total-glucides").textContent = total.toFixed(1);
     }
+
+    document.getElementById("toggle-dark").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const btn = document.getElementById("toggle-dark");
+      btn.textContent = document.body.classList.contains("dark-mode") 
+        ? "☀️ Mode clair" 
+        : "🌙 Mode sombre";
+    });
 
     ajouterLigne();
     ajouterPortion();
