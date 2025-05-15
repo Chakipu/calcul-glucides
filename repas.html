@@ -11,6 +11,8 @@
       --banner: #ffd1dc;
       --button: #00a8cc;
       --button-hover: #007ea7;
+      --delete: #ff4d4d;
+      --delete-hover: #cc0000;
     }
 
     body.dark {
@@ -20,6 +22,8 @@
       --banner: #444;
       --button: #2196f3;
       --button-hover: #1976d2;
+      --delete: #ff6666;
+      --delete-hover: #ff0000;
     }
 
     body {
@@ -109,6 +113,19 @@
     .toggle-darkmode:hover {
       background: var(--button-hover);
     }
+
+    .delete-row {
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--delete);
+      border: none;
+      background: none;
+      font-size: 20px;
+    }
+
+    .delete-row:hover {
+      color: var(--delete-hover);
+    }
   </style>
 </head>
 <body>
@@ -132,6 +149,7 @@
           <th>Quantité (g)</th>
           <th>Glucides / 100g</th>
           <th>Glucides consommés</th>
+          <th>Supprimer</th>
         </tr>
       </thead>
       <tbody id="repas-body"></tbody>
@@ -146,6 +164,7 @@
           <th>Glucides / portion</th>
           <th>Nombre de portions</th>
           <th>Glucides consommés</th>
+          <th>Supprimer</th>
         </tr>
       </thead>
       <tbody id="portion-body"></tbody>
@@ -160,6 +179,7 @@
           <th>Glucides / portion</th>
           <th>Nombre de portions</th>
           <th>Glucides consommés</th>
+          <th>Supprimer</th>
         </tr>
       </thead>
       <tbody id="laitier-body"></tbody>
@@ -216,7 +236,8 @@
         </select></td>
         <td><input type="number" class="quantite" min="0"></td>
         <td><input type="number" class="glucides-unit" readonly></td>
-        <td><input type="number" class="glucides-total" readonly></td>`;
+        <td><input type="number" class="glucides-total" readonly></td>
+        <td><button class="delete-row" onclick="supprimerLigne(this)">❌</button></td>`;
 
       tbody.appendChild(tr);
 
@@ -248,7 +269,8 @@
         </select></td>
         <td><input type="number" class="glucides-portion" readonly></td>
         <td><input type="number" class="nb-portions" min="0"></td>
-        <td><input type="number" class="glucides-total" readonly></td>`;
+        <td><input type="number" class="glucides-total" readonly></td>
+        <td><button class="delete-row" onclick="supprimerLigne(this)">❌</button></td>`;
 
       tbody.appendChild(tr);
 
@@ -259,6 +281,12 @@
       };
 
       tr.querySelector(".nb-portions").oninput = () => calculerGlucidesPortion(tr);
+    }
+
+    function supprimerLigne(btn) {
+      const tr = btn.closest("tr");
+      tr.remove();
+      calculerTotalGlucides();
     }
 
     function calculerGlucides(row) {
