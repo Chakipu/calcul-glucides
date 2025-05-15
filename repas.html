@@ -144,11 +144,11 @@
     <table id="repas-table">
       <thead>
         <tr>
-          <th>Catégorie</th>
           <th>Aliment</th>
           <th>Quantité (g)</th>
           <th>Glucides / 100g</th>
           <th>Glucides consommés</th>
+          <th>Catégorie</th>
           <th>Supprimer</th>
         </tr>
       </thead>
@@ -164,6 +164,7 @@
           <th>Glucides / portion</th>
           <th>Nombre de portions</th>
           <th>Glucides consommés</th>
+          <th>Catégorie</th>
           <th>Supprimer</th>
         </tr>
       </thead>
@@ -179,6 +180,7 @@
           <th>Glucides / portion</th>
           <th>Nombre de portions</th>
           <th>Glucides consommés</th>
+          <th>Catégorie</th>
           <th>Supprimer</th>
         </tr>
       </thead>
@@ -211,18 +213,18 @@
     ];
 
     const portions = [
-      { aliment: "Pomme", glucides: 15 },
-      { aliment: "Banane", glucides: 20 },
-      { aliment: "Yaourt sucré", glucides: 10 },
-      { aliment: "Compote individuelle", glucides: 15 },
-      { aliment: "Jus de fruit (200ml)", glucides: 20 },
-      { aliment: "Barre chocolatée", glucides: 25 }
+      { categorie: "Fruits", aliment: "Pomme", glucides: 15 },
+      { categorie: "Fruits", aliment: "Banane", glucides: 20 },
+      { categorie: "Fruits", aliment: "Yaourt sucré", glucides: 10 },
+      { categorie: "Fruits", aliment: "Compote individuelle", glucides: 15 },
+      { categorie: "Fruits", aliment: "Jus de fruit (200ml)", glucides: 20 },
+      { categorie: "Fruits", aliment: "Barre chocolatée", glucides: 25 }
     ];
 
     const produitsLaitiers = [
-      { aliment: "Yaourt Nature", glucides: 5 },
-      { aliment: "Yaourt aromatisé", glucides: 10 },
-      { aliment: "Yaourt avec fruits", glucides: 15 }
+      { categorie: "Produits Laitiers", aliment: "Yaourt Nature", glucides: 5 },
+      { categorie: "Produits Laitiers", aliment: "Yaourt aromatisé", glucides: 10 },
+      { categorie: "Produits Laitiers", aliment: "Yaourt avec fruits", glucides: 15 }
     ];
 
     function ajouterLigne() {
