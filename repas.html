@@ -30,7 +30,7 @@
       font-family: sans-serif;
       padding: 20px;
       margin: 0;
-      background: url('./images/fond.svg') no-repeat center center fixed;
+      background: url('./images/soukie_ghibli.png') no-repeat center center fixed;
       background-size: cover;
       background-color: var(--bg);
       color: var(--text);
@@ -91,24 +91,29 @@
       background-color: var(--button-hover);
     }
 
-    .banniere {
-      background-color: var(--banner);
-      color: var(--text);
-      padding: 20px;
-      text-align: center;
-      font-size: 1.5em;
-      font-weight: bold;
-    }
+.banniere {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  color: #000;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 999;
+}
 
-    .toggle-darkmode {
-      margin-top: 10px;
-      cursor: pointer;
-      padding: 8px 12px;
-      background: var(--button);
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-    }
+.toggle-darkmode {
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
 
     .toggle-darkmode:hover {
       background: var(--button-hover);
@@ -134,9 +139,10 @@
     document.body.classList.add('dark');
   }
 </script>
-  <button class="toggle-darkmode" onclick="document.body.classList.toggle('dark')">🌙</button>
+
   <div class="banniere">
-    Calcul des glucides – Repas
+      <button class="toggle-darkmode" onclick="document.body.classList.toggle('dark')">🌙</button>
+      Calcul des glucides – Repas
   </div>
 
   <header>
